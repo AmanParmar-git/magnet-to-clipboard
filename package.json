@@ -1,6 +1,6 @@
 {
   "name": "magnet-to-clipboard",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "copy magnets from your termial",
   "main": "bin/index.js",
   "scripts": {

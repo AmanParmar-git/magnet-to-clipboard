@@ -5,6 +5,12 @@ npm i -g magnet-to-clipboard
 
 ```
 
+if you are getting any errors try installing with following command
+
+```
+npm i -g magnet-to-clipboard --unsafe-perm=true --allow-root
+```
+
 ## currently implemented providers
 
 ```

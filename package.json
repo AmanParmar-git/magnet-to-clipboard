@@ -1,12 +1,20 @@
 {
   "name": "magnet-to-clipboard",
   "version": "1.0.0",
-  "description": "",
+  "description": "copy magnets from your termial",
   "main": "bin/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
+  "keywords": [
+    "scraper",
+    "peerlfix",
+    "torrent scraper",
+    "magnet scraper",
+    "web scraping",
+    "magnet",
+    "torrent"
+  ],
   "author": "",
   "license": "ISC",
   "bin": {
@@ -19,5 +27,9 @@
     "clipboardy": "^2.3.0",
     "inquirer": "^7.3.3",
     "puppeteer": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AmanParmar-git/magnet-to-clipboard"
   }
 }

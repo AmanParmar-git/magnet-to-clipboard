@@ -28,18 +28,18 @@ after installing type
 
 you will be propmted with providers
 
-![alt text](https://github.com/AmanParmar-git/magnet-to-clipboard/blob/master/screenshots/providers.png)
+![alt text](https://raw.githubusercontent.com/AmanParmar-git/magnet-to-clipboard/master/screenshots/providers.png)
 
 select movie
 
-![alt text](https://github.com/AmanParmar-git/magnet-to-clipboard/blob/master/screenshots/movies.png)
+![alt text](https://raw.githubusercontent.com/AmanParmar-git/magnet-to-clipboard/master/screenshots/movies.png)
 
 select quality
 
-![alt text](https://github.com/AmanParmar-git/magnet-to-clipboard/blob/master/screenshots/quality.png)
+![alt text](https://raw.githubusercontent.com/AmanParmar-git/magnet-to-clipboard/master/screenshots/quality.png)
 
 done!!
 
-![alt text](https://github.com/AmanParmar-git/magnet-to-clipboard/blob/master/screenshots/done.png)
+![alt text](https://raw.githubusercontent.com/AmanParmar-git/magnet-to-clipboard/master/screenshots/done.png)
 
 Now you can paste it any torrent client or streming clients , Easy as that.

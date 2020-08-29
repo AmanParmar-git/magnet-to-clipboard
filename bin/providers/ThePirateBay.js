@@ -1,8 +1,11 @@
 const p = require("puppeteer");
 const cheerio = require("cheerio");
-const Movie = require("./MovieModel.js");
+const Movie = require("../tools/MovieModel.js");
+const inq = require("../tools/inq");
+const clipborady = require("clipboardy");
+const chalk = require("chalk");
 
-module.exports = async function (query) {
+async function pirateQuery(query) {
   const browser = await p.launch();
   const newPage = await browser.newPage();
   await newPage.goto(
@@ -22,4 +25,32 @@ module.exports = async function (query) {
     result.push(new Movie(name, torrents, seeds, size));
   }
   return result;
-};
+}
+
+function mapTorrent(movies) {
+  const results = [];
+  for (let i = 0; i < movies.length; i++) {
+    let { Name, Seeds, Size } = movies[i];
+    results.push(`Name : ${Name} , Seeds : ${Seeds} , Size : ${Size}`);
+  }
+  return results;
+}
+
+async function ThePirateBay(query) {
+  const movies = await pirateQuery(query);
+  const torrents = mapTorrent(movies);
+
+  const { torrent } = await inq(
+    "Choose movie...",
+    "rawlist",
+    "torrent",
+    torrents
+  );
+
+  clipborady.writeSync(movies[torrents.indexOf(torrent)].Torrents);
+  console.log(
+    chalk.italic.redBright("Magnet Copied To Clipboard!!! Have fun.")
+  );
+}
+
+module.exports = ThePirateBay;

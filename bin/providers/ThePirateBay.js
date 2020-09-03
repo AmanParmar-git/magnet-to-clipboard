@@ -1,9 +1,6 @@
 const p = require("puppeteer");
 const cheerio = require("cheerio");
 const Movie = require("../tools/MovieModel.js");
-const inq = require("../tools/inq");
-const clipborady = require("clipboardy");
-const chalk = require("chalk");
 
 async function pirateQuery(query) {
   const browser = await p.launch();
@@ -27,30 +24,9 @@ async function pirateQuery(query) {
   return result;
 }
 
-function mapTorrent(movies) {
-  const results = [];
-  for (let i = 0; i < movies.length; i++) {
-    let { Name, Seeds, Size } = movies[i];
-    results.push(`Name : ${Name} , Seeds : ${Seeds} , Size : ${Size}`);
-  }
-  return results;
-}
-
 async function ThePirateBay(query) {
   const movies = await pirateQuery(query);
-  const torrents = mapTorrent(movies);
-
-  const { torrent } = await inq(
-    "Choose movie...",
-    "rawlist",
-    "torrent",
-    torrents
-  );
-
-  clipborady.writeSync(movies[torrents.indexOf(torrent)].Torrents);
-  console.log(
-    chalk.italic.redBright("Magnet Copied To Clipboard!!! Have fun.")
-  );
+  return movies;
 }
 
 module.exports = ThePirateBay;

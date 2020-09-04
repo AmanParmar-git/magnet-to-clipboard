@@ -5,7 +5,9 @@ const inq = require("./tools/inq");
 const chalk = require("chalk");
 const Eztv = require("./providers/Eztv");
 const Rarbg = require("./providers/Rarbg");
+const { x1337x, x1337xGetMagnet } = require("./providers/1337x");
 const clipboardy = require("clipboardy");
+
 var args = process.argv.slice(2);
 if (args.length > 0) {
   var query = args.reduce((i, j) => {
@@ -32,6 +34,7 @@ inq("Select Provider...", "list", "provider", [
   "ThePirateBay",
   "Eztv",
   "Rarbg",
+  "1337x",
 ]).then(async ({ provider }) => {
   if (provider === "Yts") {
     Yts(query);
@@ -50,6 +53,9 @@ inq("Select Provider...", "list", "provider", [
         movies = await Rarbg(query);
         break;
       }
+      case "1337x": {
+        movies = await x1337x(query);
+      }
     }
     const data = getPromptData(movies);
 
@@ -59,8 +65,12 @@ inq("Select Provider...", "list", "provider", [
       "torrent",
       data
     );
+    let magnetToCopy = movies[data.indexOf(torrent)].Torrents;
+    if (provider === "1337x") {
+      magnetToCopy = await x1337xGetMagnet(magnetToCopy);
+    }
+    clipboardy.writeSync(magnetToCopy);
 
-    clipboardy.writeSync(movies[data.indexOf(torrent)].Torrents);
     console.log(
       chalk.italic.redBright("magnet copied to clipboard , enjoy watching!")
     );

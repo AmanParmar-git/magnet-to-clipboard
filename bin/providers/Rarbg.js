@@ -1,5 +1,6 @@
 const axios = require("axios");
 const Movie = require("../tools/MovieModel");
+
 // async function RarbgToken() {
 //   const { data } = await axios.get(
 //     "https://torrentapi.org/pubapi_v2.php?get_token=get_token&app_id=magnet-to-torrent"
@@ -26,6 +27,7 @@ async function Rarbgquery(query, limit) {
 
 function tableRar(table) {
   const result = [];
+
   for (let i = 0; i < table.length; i++) {
     let { title, download, seeders, size } = table[i];
     size = bytesToSize(size);
@@ -35,8 +37,18 @@ function tableRar(table) {
 }
 
 async function Rarbg(query, limit) {
-  const { torrent_results: table } = await Rarbgquery(query, limit);
-  const movies = tableRar(table);
+  const { torrent_results: data } = await Rarbgquery(query, limit);
+  if (!data) {
+    console.log(
+      chalk.yellowBright(
+        "Cannot find anything with your query : " +
+          query +
+          " or something gone wrong , try again after sometime"
+      )
+    );
+    process.exit(0);
+  }
+  const movies = tableRar(data);
   return movies;
 }
 

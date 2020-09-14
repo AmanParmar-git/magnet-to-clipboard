@@ -5,7 +5,6 @@ const inq = require("./tools/inq");
 const chalk = require("chalk");
 const Eztv = require("./providers/Eztv");
 const Rarbg = require("./providers/Rarbg");
-const { x1337x, x1337xGetMagnet } = require("./providers/1337x");
 const clipboardy = require("clipboardy");
 
 var args = process.argv.slice(2);
@@ -15,7 +14,7 @@ if (args.length > 0) {
   });
 } else {
   console.log(
-    chalk.greenBright("enter something to search dude! eg. 'magnet avengers'")
+    chalk.greenBright("enter something to search dude! ex. 'magnet avengers'")
   );
   process.exit(0);
 }
@@ -34,12 +33,11 @@ inq("Select Provider...", "list", "provider", [
   "ThePirateBay",
   "Eztv",
   "Rarbg",
-  "1337x",
 ]).then(async ({ provider }) => {
   if (provider === "Yts") {
     Yts(query);
   } else {
-    let movies = [];
+    let movies = "";
     switch (provider) {
       case "ThePirateBay": {
         movies = await ThePirateBay(query);
@@ -53,10 +51,8 @@ inq("Select Provider...", "list", "provider", [
         movies = await Rarbg(query);
         break;
       }
-      case "1337x": {
-        movies = await x1337x(query);
-      }
     }
+
     const data = getPromptData(movies);
 
     const { torrent } = await inq(

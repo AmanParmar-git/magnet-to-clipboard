@@ -10,12 +10,13 @@ async function eztvquery(query) {
     try {
       res = await axios.get(`https://eztv.io/search/${query}`);
     } catch (e) {
+      console.log(e.message);
       console.log(
         chalk.greenBright(
           "server not responding , please wait i'm retrying, you can wait or try agian later!!"
         )
       );
-      await sleep(1000);
+      await sleep(5000);
       await get();
     }
   }

@@ -3,19 +3,35 @@ const Movie = require("../tools/MovieModel.js");
 const inq = require("../tools/inq");
 const clipbordy = require("clipboardy");
 const chalk = require("chalk");
+const sleep = require("../tools/sleep");
 
 async function ytsquery(query = "", limit = 10, page = 1) {
-  const res = await axios.get(
-    `https://yts.mx/api/v2/list_movies.json?query_term=${query}&limit=${limit}&page=${page}`
-  );
-
-  const movies = res.data.data.movies;
   const result = [];
-  if (!movies) return [];
-  for (let i = 0; i < movies.length; i++) {
-    let { title_long, torrents } = movies[i];
-    result.push(new Movie(title_long, torrents));
+
+  async function get() {
+    try {
+      const res = await axios.get(
+        `https://yts.mx/api/v2/list_movies.json?query_term=${query}&limit=${limit}&page=${page}`
+      );
+
+      const movies = res.data.data.movies;
+      if (!movies) return [];
+      for (let i = 0; i < movies.length; i++) {
+        let { title_long, torrents } = movies[i];
+        result.push(new Movie(title_long, torrents));
+      }
+    } catch (e) {
+      console.log(e.message);
+      console.log(
+        chalk.greenBright(
+          "server not responding , please wait i'm retrying, you can wait or try agian later!!"
+        )
+      );
+      await sleep(5000);
+      await get();
+    }
   }
+  await get();
   return result;
 }
 

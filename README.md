@@ -48,4 +48,4 @@ done!!
 
 ![alt text](https://raw.githubusercontent.com/AmanParmar-git/magnet-to-clipboard/master/screenshots/done.png)
 
-Now you can paste it any torrent client or streming clients , Easy as that.
+Now you can paste it in any torrent client or streming clients , Easy as that.
